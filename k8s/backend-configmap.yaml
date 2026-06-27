@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: book-library
+data:
+  DB_HOST: postgres
+  DB_PORT: "5432"
+  DB_NAME: books
+  DB_USERNAME: postgres
+  CORS_ALLOWED_ORIGIN: http://localhost:8080
