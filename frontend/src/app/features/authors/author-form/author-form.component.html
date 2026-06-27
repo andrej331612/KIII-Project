@@ -1,0 +1,38 @@
+<h1>{{ isEditMode() ? 'Edit Author' : 'Add New Author' }}</h1>
+
+@if (loading()) {
+  <p class="state-message">Loading...</p>
+}
+
+@if (error()) {
+  <p class="state-message state-message--error">{{ error() }}</p>
+}
+
+<div class="form-card">
+  <form (ngSubmit)="submit()">
+    <div class="form-field">
+      <label for="name">First Name</label>
+      <input id="name" type="text" [ngModel]="name()" (ngModelChange)="name.set($event)" name="name" required maxlength="100">
+    </div>
+
+    <div class="form-field">
+      <label for="surname">Last Name</label>
+      <input id="surname" type="text" [ngModel]="surname()" (ngModelChange)="surname.set($event)" name="surname" required maxlength="50">
+    </div>
+
+    <div class="form-field">
+      <label for="country">Country</label>
+      <input id="country" type="text" [ngModel]="country()" (ngModelChange)="country.set($event)" name="country" required maxlength="50">
+    </div>
+
+    <div class="form-field">
+      <label for="biography">Biography</label>
+      <textarea id="biography" [ngModel]="biography()" (ngModelChange)="biography.set($event)" name="biography" required maxlength="1000" rows="5"></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn--primary">{{ isEditMode() ? 'Update Author' : 'Create Author' }}</button>
+      <a routerLink="/authors" class="btn btn--secondary">Cancel</a>
+    </div>
+  </form>
+</div>

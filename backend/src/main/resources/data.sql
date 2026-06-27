@@ -69,10 +69,10 @@ SELECT 'Pet Sematary', 'Horror', 3.90, (SELECT id FROM authors WHERE name = 'Ste
     WHERE NOT EXISTS (SELECT 1 FROM books WHERE title = 'Pet Sematary');
 
 -- 🔥 Sample Reservations (not guarded - transactional demo records, harmless if repeated)
-INSERT INTO book_reservations (book_title, reader_name, reader_address, number_of_copies, ip_address)
-SELECT 'The Lord of the Rings', 'Alexander', 'Skopje, Ilinden Blvd', 2, '127.0.0.1'
+INSERT INTO book_reservations (book_title, reader_name, reader_address, number_of_copies, ip_address, created_at)
+SELECT 'The Lord of the Rings', 'Alexander', 'Skopje, Ilinden Blvd', 2, '127.0.0.1', CURRENT_TIMESTAMP
     WHERE NOT EXISTS (SELECT 1 FROM book_reservations WHERE reader_name = 'Alexander' AND book_title = 'The Lord of the Rings');
 
-INSERT INTO book_reservations (book_title, reader_name, reader_address, number_of_copies, ip_address)
-SELECT 'Pride and Prejudice', 'Maria', 'Bitola, Partizanska St', 1, '192.168.1.10'
+INSERT INTO book_reservations (book_title, reader_name, reader_address, number_of_copies, ip_address, created_at)
+SELECT 'Pride and Prejudice', 'Maria', 'Bitola, Partizanska St', 1, '192.168.1.10', CURRENT_TIMESTAMP
     WHERE NOT EXISTS (SELECT 1 FROM book_reservations WHERE reader_name = 'Maria' AND book_title = 'Pride and Prejudice');

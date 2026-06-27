@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h1>Books</h1>
+  <a routerLink="/books/new" class="btn btn--primary">+ Add Book</a>
+</div>
+
+@if (selectedAuthor()) {
+  <p class="state-message">Showing books by {{ selectedAuthor()!.name }} {{ selectedAuthor()!.surname }}</p>
+}
+
+@if (loading()) {
+  <p class="state-message">Loading...</p>
+}
+
+@if (error()) {
+  <p class="state-message state-message--error">{{ error() }}</p>
+}
+
+@if (!loading() && books().length === 0) {
+  <p class="state-message">No books found.</p>
+}
+
+@if (!loading() && books().length > 0) {
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Genre</th>
+        <th>Rating</th>
+        <th>Author</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (book of books(); track book.id) {
+        <tr>
+          <td>{{ book.title }}</td>
+          <td>{{ book.genre }}</td>
+          <td>{{ book.averageRating }}/5</td>
+          <td>{{ book.author.name }} {{ book.author.surname }}</td>
+          <td class="data-table__actions">
+            <a [routerLink]="['/books', book.id, 'edit']" class="btn btn--small">Edit</a>
+            <button (click)="deleteBook(book.id!)" class="btn btn--small btn--danger">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

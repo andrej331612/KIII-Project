@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h1>Reservations</h1>
+  <a routerLink="/reservations/new" class="btn btn--primary">+ New Reservation</a>
+</div>
+
+@if (loading()) {
+  <p class="state-message">Loading...</p>
+}
+
+@if (error()) {
+  <p class="state-message state-message--error">{{ error() }}</p>
+}
+
+@if (!loading() && reservations().length === 0) {
+  <p class="state-message">No reservations yet.</p>
+}
+
+@if (!loading() && reservations().length > 0) {
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Book</th>
+        <th>Reader</th>
+        <th>Address</th>
+        <th>Copies</th>
+        <th>Reserved</th>
+        <th>IP</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (reservation of reservations(); track reservation.id) {
+        <tr>
+          <td>{{ reservation.bookTitle }}</td>
+          <td>{{ reservation.readerName }}</td>
+          <td class="data-table__truncate">{{ reservation.readerAddress }}</td>
+          <td>{{ reservation.numberOfCopies }}</td>
+          <td>{{ reservation.createdAt }}</td>
+          <td>{{ reservation.ipAddress }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
