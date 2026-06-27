@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: book-library
+data:
+  POSTGRES_DB: books
+  POSTGRES_USER: postgres
